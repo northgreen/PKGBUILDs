@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /opt/osu-ex2lazer/Ez2osu!
+exec "/opt/osu-ez2lazer/Ez2osu!"
