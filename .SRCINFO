@@ -8,7 +8,8 @@ pkgbase = ez2lazer-git
 	makedepends = dotnet-sdk-8.0
 	makedepends = git
 	makedepends = python
-	depends = dotnet-runtime
+	depends = ffmpeg4.4
+	depends = lttng-ust2.12
 	source = osu::git+https://github.com/SK-la/Ez2Lazer.git#branch=locmain
 	source = osu-framework::git+https://github.com/SK-la/osu-framework.git#branch=locmain
 	source = osu-resources::git+https://github.com/SK-la/osu-resources.git#branch=locmain
@@ -18,7 +19,7 @@ pkgbase = ez2lazer-git
 	sha256sums = SKIP
 	sha256sums = SKIP
 	sha256sums = SKIP
-	sha256sums = 181ad9f3de9c17688aa8e54331fd77d4dd405b1a52bfe8b23878706aec72575a
+	sha256sums = a3f9ed38e65e5ce1b89c7df53d4139ade3af7eb0e379ef61a2a69a128d8bcbde
 	sha256sums = 17a504de02a94727584e77c90d93b6bf072dd40f339e05fb2df038f67d9a9d6d
 	sha256sums = 30cf4df3fd76006b08a0bcb6a325fb2fdcf6a4371f77001da3c38cbce871bd51
 
