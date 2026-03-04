@@ -1,7 +1,7 @@
 pkgname=ez2lazer-git
 url="https://github.com/SK-la/Ez2Lazer"
 pkgrel=1
-pkgver=2026.2.17.r38.gf95c9eb48c
+pkgver=2026.2.26.r38.gb1fbf7a0f1
 pkgdesc="Ez to Lazer(Pursue the Ez2Ac style in the lazer)做一个炫酷的客户端"
 arch=("x86_64")
 license=("MIT")
@@ -19,11 +19,11 @@ source=(
     "lazer.png")
 
 sha256sums=('SKIP'
-    'SKIP'
-    'SKIP'
-    '9ff0894014e1ca9d9096e0050f2e4e36afe8f14275249045376c7dff150274d3'
-    '17a504de02a94727584e77c90d93b6bf072dd40f339e05fb2df038f67d9a9d6d'
-    '30cf4df3fd76006b08a0bcb6a325fb2fdcf6a4371f77001da3c38cbce871bd51')
+            'SKIP'
+            'SKIP'
+            '181ad9f3de9c17688aa8e54331fd77d4dd405b1a52bfe8b23878706aec72575a'
+            '17a504de02a94727584e77c90d93b6bf072dd40f339e05fb2df038f67d9a9d6d'
+            '30cf4df3fd76006b08a0bcb6a325fb2fdcf6a4371f77001da3c38cbce871bd51')
 
 pkgver() {
     cd osu

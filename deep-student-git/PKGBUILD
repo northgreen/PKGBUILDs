@@ -1,0 +1,87 @@
+# Maintainer: ictye <northgreen2006 at qq dot com>
+pkgname=deep-student-git
+url="https://github.com/helixnow/deep-student"
+pkgrel=1
+pkgver=v0.9.30.r2.g673fe13
+pkgdesc="AI驱动的智能学习助手,Deep Student 是一款专为学生设计的AI驱动的智能学习助手。它利用先进的人工智能技术，帮助用户进行错题分析、知识点梳理和个性化学习，从而实现深度理解和高效学习。"
+arch=("x86_64")
+license=("AGPL-3.0")
+depends=(
+    "xz"
+    "gtk3"
+    "gdk-pixbuf2"
+    "cairo"
+    "glib2"
+    "webkit2gtk-4.1"
+    "libsoup3"
+    "libgcc"
+    "glibc"
+)
+makedepends=(
+    'cargo'
+    "npm"
+    'base-devel'
+    'clang'
+    "sqlite"
+)
+source=(
+    "deep-student::git+https://github.com/helixnow/deep-student.git#branch=main"
+)
+
+sha256sums=('SKIP')
+
+pkgver() {
+    cd deep-student
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+    # 创建一个强制链接 sqlite3 的构建脚本
+    cat >build.rs <<'EOF'
+fn main() {
+    // 告诉 Cargo 链接系统的 sqlite3 库
+    println!("cargo:rustc-link-lib=sqlite3");
+    // 指定库搜索路径（通常 /usr/lib 已是默认路径，但显式指定更安全）
+    println!("cargo:rustc-link-search=native=/usr/lib");
+    // 避免不必要的重新构建
+    println!("cargo:rerun-if-changed=build.rs");
+}
+EOF
+
+    # 确保 Cargo.toml 包含这个 build.rs（如果它还没有被包含）
+    # 如果项目根目录没有 Cargo.toml（可能是一个工作区），则需要调整位置
+    # 假设主 crate 在 src-tauri，我们需要将 build.rs 放在那里
+    if [ -f "src-tauri/Cargo.toml" ]; then
+        cp build.rs src-tauri/
+    fi
+}
+
+build() {
+    # $srcdir/osu/publish-linux.py --no-zip --outroot $srcdir
+    cdir=$(pwd)
+    cd $srcdir/deep-student
+    ls $srcdir/deep-student
+
+    # SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install
+    # node scripts/generate-version.mjs
+    # npm run build
+    # npm run tauri build -- --bundles deb
+
+    SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install
+    npm run build
+    npm run tauri build -- --bundles deb
+
+    ls $srcdir
+    cd $cdir
+
+}
+
+package() {
+    # mkdir -p "$pkgdir"/opt/osu-ez2lazer
+    # cp -dr --no-preserve=ownership "$srcdir"/Ez2Lazer_release_x64/* "$pkgdir"/opt/osu-ez2lazer
+    # install -D -m755 osu-ez2lazer "$pkgdir"/usr/bin/osu-ez2lazer
+    #
+    # install -D -m644 osu-ez2lazer.desktop "$pkgdir"/usr/share/applications/osu-ez2lazer.desktop
+    # install -D -m644 lazer.png "$pkgdir"/usr/share/pixmaps/ez2lazer.png
+    ls $srcdir
+}

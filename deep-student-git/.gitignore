@@ -1,0 +1,5 @@
+pkg/
+src/
+deep-student/
+*.log
+*.zst
