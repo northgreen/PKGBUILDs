@@ -10,7 +10,7 @@ depends=(
     'dotnet-runtime'
     )
 makedepends=('dotnet-sdk'
-    "python311")
+    "python")
 source=(
     "osu::git+https://github.com/SK-la/Ez2Lazer.git#branch=locmain"
     "osu-framework::git+https://github.com/SK-la/osu-framework.git#branch=locmain"
