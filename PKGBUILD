@@ -1,23 +1,23 @@
 # Maintainer: ictye <northgreen2006 at qq dot com>
 pkgname=ez2lazer-git
-url="https://github.com/SK-la/Ez2Lazer"
+url='https://github.com/SK-la/Ez2Lazer'
 pkgrel=1
 pkgver=2026.2.26.r38.gb1fbf7a0f1
-pkgdesc="Ez to Lazer(Pursue the Ez2Ac style in the lazer)做一个炫酷的客户端"
+pkgdesc='Ez to Lazer(Pursue the Ez2Ac style in the lazer)做一个炫酷的客户端'
 arch=("x86_64")
 license=("MIT")
 depends=(
-    'dotnet-runtime'
-    )
-makedepends=('dotnet-sdk'
-    "python")
+    'dotnet-runtime')
+makedepends=(
+    'dotnet-sdk-8.0'
+    'python')
 source=(
-    "osu::git+https://github.com/SK-la/Ez2Lazer.git#branch=locmain"
-    "osu-framework::git+https://github.com/SK-la/osu-framework.git#branch=locmain"
-    "osu-resources::git+https://github.com/SK-la/osu-resources.git#branch=locmain"
-    "osu-ez2lazer"
-    "osu-ez2lazer.desktop"
-    "lazer.png")
+    'osu::git+https://github.com/SK-la/Ez2Lazer.git#branch=locmain'
+    'osu-framework::git+https://github.com/SK-la/osu-framework.git#branch=locmain'
+    'osu-resources::git+https://github.com/SK-la/osu-resources.git#branch=locmain'
+    'osu-ez2lazer'
+    'osu-ez2lazer.desktop'
+    'lazer.png')
 
 sha256sums=('SKIP'
             'SKIP'
@@ -33,7 +33,6 @@ pkgver() {
 
 build() {
     $srcdir/osu/publish-linux.py --no-zip --outroot $srcdir
-    ls $srcdir
 }
 
 package() {
