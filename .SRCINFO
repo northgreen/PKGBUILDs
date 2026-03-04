@@ -1,0 +1,24 @@
+pkgbase = ez2lazer-git
+	pkgdesc = Ez to Lazer(Pursue the Ez2Ac style in the lazer)做一个炫酷的客户端
+	pkgver = 2026.2.26.r38.gb1fbf7a0f1
+	pkgrel = 1
+	url = https://github.com/SK-la/Ez2Lazer
+	arch = x86_64
+	license = MIT
+	makedepends = dotnet-sdk
+	makedepends = python311
+	depends = dotnet-runtime
+	source = osu::git+https://github.com/SK-la/Ez2Lazer.git#branch=locmain
+	source = osu-framework::git+https://github.com/SK-la/osu-framework.git#branch=locmain
+	source = osu-resources::git+https://github.com/SK-la/osu-resources.git#branch=locmain
+	source = osu-ez2lazer
+	source = osu-ez2lazer.desktop
+	source = lazer.png
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = 181ad9f3de9c17688aa8e54331fd77d4dd405b1a52bfe8b23878706aec72575a
+	sha256sums = 17a504de02a94727584e77c90d93b6bf072dd40f339e05fb2df038f67d9a9d6d
+	sha256sums = 30cf4df3fd76006b08a0bcb6a325fb2fdcf6a4371f77001da3c38cbce871bd51
+
+pkgname = ez2lazer-git

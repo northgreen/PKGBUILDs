@@ -1,3 +1,4 @@
+# Maintainer: ictye <northgreen2006 at qq dot com>
 pkgname=ez2lazer-git
 url="https://github.com/SK-la/Ez2Lazer"
 pkgrel=1
