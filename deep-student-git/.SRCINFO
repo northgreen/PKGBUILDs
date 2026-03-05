@@ -1,0 +1,31 @@
+pkgbase = deep-student-git
+	pkgdesc = AI驱动的智能学习助手,Deep Student 是一款专为学生设计的AI驱动的智能学习助手。它利用先进的人工智能技术，帮助用户进行错题分析、知识点梳理和个性化学习，从而实现深度理解和高效学习。
+	pkgver = v0.9.31.r0.g3224cf2
+	pkgrel = 1
+	url = https://github.com/helixnow/deep-student
+	arch = x86_64
+	license = AGPL-3.0-only
+	makedepends = git
+	makedepends = cargo
+	makedepends = npm
+	makedepends = clang
+	makedepends = pkg-config
+	makedepends = protobuf
+	depends = xz
+	depends = gtk3
+	depends = gdk-pixbuf2
+	depends = cairo
+	depends = glib2
+	depends = webkit2gtk-4.1
+	depends = libsoup3
+	depends = libgcc
+	depends = glibc
+	depends = bzip2
+	source = deep-student::git+https://github.com/helixnow/deep-student.git#branch=main
+	source = deep-student.png
+	source = deep-student.desktop
+	sha256sums = SKIP
+	sha256sums = bd0bdcdb69b6e502ae2700eebdfcede0b3465abdc3d8254720ffcb1f6d2cc13e
+	sha256sums = 158a3a0a3221940180409c6a79b9e3e08a64d4f56bc3a8da200132a9b984c8ae
+
+pkgname = deep-student-git

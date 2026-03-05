@@ -1,10 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=osu!Ez2Lazer
-MimeType=application/x-osu-skin-archive;application/x-osu-replay;application/x-osu-beatmap-archive;
-Icon=/usr/share/pixmaps/ez2lazer.png
-Comment=Ez to Lazer(Pursue the Ez2Ac style in the lazer)做一个炫酷的客户端
-Exec=/usr/bin/osu-ez2lazer
-Categories=Game;
-
+Name=Deep Student
+Icon=/usr/share/pixmaps/deep-student.png
+Comment=AI驱动的智能学习助手,Deep Student 是一款专为学生设计的AI驱动的智能学习助手。它利用先进的人工智能技术，帮助用户进行错题分析、知识点梳理和个性化学习，从而实现深度理解和高效学习。"
+Exec=/usr/bin/deep-student
+Categories=Education;
 

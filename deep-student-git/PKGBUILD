@@ -1,87 +1,80 @@
 # Maintainer: ictye <northgreen2006 at qq dot com>
 pkgname=deep-student-git
-url="https://github.com/helixnow/deep-student"
+url='https://github.com/helixnow/deep-student'
 pkgrel=1
-pkgver=v0.9.30.r2.g673fe13
-pkgdesc="AI驱动的智能学习助手,Deep Student 是一款专为学生设计的AI驱动的智能学习助手。它利用先进的人工智能技术，帮助用户进行错题分析、知识点梳理和个性化学习，从而实现深度理解和高效学习。"
-arch=("x86_64")
-license=("AGPL-3.0")
+pkgver=v0.9.31.r0.g3224cf2
+pkgdesc='AI驱动的智能学习助手,Deep Student 是一款专为学生设计的AI驱动的智能学习助手。它利用先进的人工智能技术，帮助用户进行错题分析、知识点梳理和个性化学习，从而实现深度理解和高效学习。'
+arch=('x86_64')
+license=('AGPL-3.0-only')
 depends=(
-    "xz"
-    "gtk3"
-    "gdk-pixbuf2"
-    "cairo"
-    "glib2"
-    "webkit2gtk-4.1"
-    "libsoup3"
-    "libgcc"
-    "glibc"
+    'xz'
+    'gtk3'
+    'gdk-pixbuf2'
+    'cairo'
+    'glib2'
+    'webkit2gtk-4.1'
+    'libsoup3'
+    'libgcc'
+    'glibc'
+    'bzip2'
 )
 makedepends=(
+    'git'
     'cargo'
-    "npm"
-    'base-devel'
+    'npm'
     'clang'
-    "sqlite"
+    'pkg-config'
+
+    'protobuf'
 )
 source=(
-    "deep-student::git+https://github.com/helixnow/deep-student.git#branch=main"
+    'deep-student::git+https://github.com/helixnow/deep-student.git#branch=main'
+    'deep-student.png'
+    'deep-student.desktop'
 )
 
-sha256sums=('SKIP')
+sha256sums=('SKIP'
+    'bd0bdcdb69b6e502ae2700eebdfcede0b3465abdc3d8254720ffcb1f6d2cc13e'
+    '158a3a0a3221940180409c6a79b9e3e08a64d4f56bc3a8da200132a9b984c8ae')
 
 pkgver() {
     cd deep-student
     git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
-prepare() {
-    # 创建一个强制链接 sqlite3 的构建脚本
-    cat >build.rs <<'EOF'
-fn main() {
-    // 告诉 Cargo 链接系统的 sqlite3 库
-    println!("cargo:rustc-link-lib=sqlite3");
-    // 指定库搜索路径（通常 /usr/lib 已是默认路径，但显式指定更安全）
-    println!("cargo:rustc-link-search=native=/usr/lib");
-    // 避免不必要的重新构建
-    println!("cargo:rerun-if-changed=build.rs");
-}
-EOF
-
-    # 确保 Cargo.toml 包含这个 build.rs（如果它还没有被包含）
-    # 如果项目根目录没有 Cargo.toml（可能是一个工作区），则需要调整位置
-    # 假设主 crate 在 src-tauri，我们需要将 build.rs 放在那里
-    if [ -f "src-tauri/Cargo.toml" ]; then
-        cp build.rs src-tauri/
-    fi
-}
-
 build() {
-    # $srcdir/osu/publish-linux.py --no-zip --outroot $srcdir
-    cdir=$(pwd)
-    cd $srcdir/deep-student
-    ls $srcdir/deep-student
+    cd "$srcdir/deep-student"
+    target="$CARCH-unknown-linux-gnu"
 
-    # SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install
-    # node scripts/generate-version.mjs
-    # npm run build
-    # npm run tauri build -- --bundles deb
+    # Already Config LTO at Cargo.toml
+    CFLAGS="${CFLAGS//-flto=auto/}"
+    CXXFLAGS="${CXXFLAGS//-flto=auto/}"
+
+    # Init PKGCONFIG Environment Variables
+    export PKG_CONFIG_LIBDIR="/does-not-exist:/usr/lib/pkgconfig:/usr/share/pkgconfig"
+    export PKG_CONFIG_SYSTEM_INCLUDE_PATH="/usr/include"
+    export PKG_CONFIG_SYSTEM_LIBRARY_PATH="/usr/lib:/lib"
 
     SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install
-    npm run build
-    npm run tauri build -- --bundles deb
 
-    ls $srcdir
-    cd $cdir
+    npm run build
+
+    node scripts/generate-version.mjs || true
+    npm run tauri build -- --target "$target" --bundles deb --no-sign # If give no bundle,it will get an error
 
 }
 
 package() {
-    # mkdir -p "$pkgdir"/opt/osu-ez2lazer
-    # cp -dr --no-preserve=ownership "$srcdir"/Ez2Lazer_release_x64/* "$pkgdir"/opt/osu-ez2lazer
-    # install -D -m755 osu-ez2lazer "$pkgdir"/usr/bin/osu-ez2lazer
-    #
-    # install -D -m644 osu-ez2lazer.desktop "$pkgdir"/usr/share/applications/osu-ez2lazer.desktop
-    # install -D -m644 lazer.png "$pkgdir"/usr/share/pixmaps/ez2lazer.png
-    ls $srcdir
+    target="$CARCH-unknown-linux-gnu"
+
+    tauri_dir="$srcdir/deep-student/src-tauri"
+    release_dir="$tauri_dir/target/$target/release"
+
+    # base install
+    install -D -m755 $release_dir/deep-student "$pkgdir"/usr/bin/deep-student
+    install -D -m644 deep-student.png "$pkgdir"/usr/share/pixmaps/deep-student.png
+    install -D -m644 deep-student.desktop "$pkgdir"/usr/share/applications/deep-student.desktop
+
+    #license
+    install -Dm644 "$srcdir/deep-student/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/AGPL-3.0.txt"
 }

@@ -1,1 +1,1 @@
-# Ez2Lazer -- a anoter Lazer client
+# Deep Student
