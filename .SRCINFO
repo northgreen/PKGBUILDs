@@ -1,6 +1,6 @@
 pkgbase = ez2lazer-git
 	pkgdesc = Ez to Lazer(Pursue the Ez2Ac style in the lazer)做一个炫酷的客户端
-	pkgver = 2026.2.26.r38.gb1fbf7a0f1
+	pkgver = 2026.3.5.r3.g0b6808b724
 	pkgrel = 1
 	url = https://github.com/SK-la/Ez2Lazer
 	arch = x86_64
