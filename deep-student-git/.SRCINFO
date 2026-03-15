@@ -1,6 +1,6 @@
 pkgbase = deep-student-git
 	pkgdesc = AI驱动的智能学习助手,Deep Student 是一款专为学生设计的AI驱动的智能学习助手。它利用先进的人工智能技术，帮助用户进行错题分析、知识点梳理和个性化学习，从而实现深度理解和高效学习。
-	pkgver = v0.9.35.r0.gf2f070c
+	pkgver = v0.9.35.r1.gf6690e9
 	pkgrel = 1
 	url = https://github.com/helixnow/deep-student
 	arch = x86_64
